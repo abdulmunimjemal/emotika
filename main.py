@@ -50,7 +50,7 @@ if st.button('Analyze Emotion'):
         # Predict emotion
         emotion, confidence = predict_emotion(user_input)
         st.markdown(f'Predicted Emotion: **{emotion.capitalize()}**')
-        st.write(f'Confidence: {round(confidence*100, 2)}%')
+        # st.write(f'Confidence: {round(confidence*100, 2)}%')
 
 # Description
 st.markdown("""
