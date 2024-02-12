@@ -55,7 +55,8 @@ if st.button('Analyze Emotion'):
 # Description
 st.markdown("""
 ### Description
-This is a simple web application for emotion analysis. It loads a trained model and tokenizer, accepts input text from the user, runs it through the model, and predicts the corresponding emotion.
+This is a simple ML Web application for emotion analysis. It accepts input text from the user, runs it through the model, and predicts the corresponding emotion.
+For further information on the Model Training and Dataset, please visit the [GitHub Repository](https://github.com/abdulmunimjemal/emotika).
 
 It classifies input text in to six categories of emotions: Joy, Sadness, Anger, Fear, Love, and Surprise.
 """)
