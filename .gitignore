@@ -1,2 +1,5 @@
 .venv/
 *cache*
+models/pretrained/*.txt
+models/pretrained/*.h5
+models/pretrained/*.bin
