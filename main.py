@@ -8,7 +8,7 @@ import numpy as np
 
 @st.cache_resource
 def load_saved_model():
-    return get_model()
+    return get_model("glove_NN_model.h5", "glove_NN_tokenizer.pickle")
 
 
 model, tokenizer = load_saved_model()
@@ -20,12 +20,12 @@ def predict_emotion(text: str) -> str:
     :param text: input text
     :return: predicted emotion
     """
-    max_length = 35  # used when training the model
+    max_length = 50  # used when training the model
 
     # Tokenize the text
     sequence = tokenizer.texts_to_sequences([text])
     sequence_padded = pad_sequences(
-        sequence, maxlen=max_length, padding='post')
+        sequence, maxlen=max_length, padding='post', truncating='post')
     # Predict the emotion
     prediction = model.predict(sequence_padded)
     prediction_class = np.argmax(prediction)
@@ -44,13 +44,19 @@ if st.button('View on GitHub'):
 
 st.write('Welcome to the Emotion Analysis App! Enter some text below to analyze the emotion.')
 
-user_input = st.text_area("Input Text", "Type Here")
+user_input = st.text_area("Input Text", "")
 if st.button('Analyze Emotion'):
     if user_input:
+        if len(user_input.split()) < 6:
+            st.error('Please enter a valid input text with at least 9 words.')
+            st.stop()
+        if len(user_input.split()) > 50:
+            st.error('Please enter a valid input text with at most 50 words.')
+            st.stop()
         # Predict emotion
         emotion, confidence = predict_emotion(user_input)
         st.markdown(f'Predicted Emotion: **{emotion.capitalize()}**')
-        # st.write(f'Confidence: {round(confidence*100, 2)}%')
+        st.write(f'Confidence: {round(confidence*100, 2)}%')
 
 # Description
 st.markdown("""
